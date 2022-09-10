@@ -1,0 +1,29 @@
+{
+  "name": "inspector",
+  "version": "1.0.0",
+  "description": "Superalgos Inspector",
+  "main": "Inspector.js",
+  "scripts": {
+    "start": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bootstrap": "^4.6.1",
+    "moment": "^2.29.3",
+    "portal-vue": "^2.1.7",
+    "vue": "^3.2.39",
+    "vue-router": "^4.0.3",
+    "ws": "^8.8.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "sass": "^1.26.11",
+    "sass-loader": "^10.0.2",
+    "vue-cli-plugin-bootstrap-vue": "~0.8.2"
+  }
+}
