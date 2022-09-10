@@ -2,16 +2,16 @@ runRoot()
 
 async function runRoot() {
   /*
-  This module represents the execution root of the Platform App.
+  This module represents the execution root of the Dashboards App.
   We use this module that is outside the Platform folder to
-  load all node dependencies and get them ready to the actual App.
+  load all node dependencies and get them ready for the actual App.
   */
 
   /*
-  The PL object is accessible everywhere at the Superalgos Platform Client.
+  The DS object is accessible everywhere at the Superalgos Dashboards Client.
   It provides access to all modules built for this Client.
   */
-  global.PL = {}
+  global.DS = {}
   /*
   The SA object is accessible everywhere at the Superalgos Desktop App.
   It provides access to all modules built for Superalgos in general.
@@ -41,7 +41,12 @@ async function runRoot() {
     util: require('util'),
     path: require('path'),
     ws: require('ws'),
-    axios: require('axios')
+    axios: require('axios'),
+    bootstrap: require('bootstrap'),
+    moment: require('moment'),
+    portalVue: require('portal-vue'),
+    vue: require('vue'),
+    vueRouter: require('vue-router')
   }
   /* 
   Setting up the App Schema Memory Map. 
@@ -52,13 +57,13 @@ async function runRoot() {
   /*
   Version Management
   */
-  //SA.version = require('./package.json').version
+  SA.version = require('./package.json').version
   run()
-  
+
   async function run() {
-    PL.app = require('./Platform/PlatformApp.js').newPlatformApp()
-    await PL.app.run(initialWorkspace)
-    console.log('Superalgos Platform App is Running!')
+    DS.app = require('./Dashboards/DashboardsApp.js').newDashboardsApp()
+    await DS.app.run(initialWorkspace)
+    console.log('Superalgos Dashboards App is Running!')
     if (process.send) {
       process.send('Running')
     }

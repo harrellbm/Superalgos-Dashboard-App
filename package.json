@@ -1,8 +1,8 @@
 {
   "name": "inspector",
   "version": "1.0.0",
-  "description": "Superalgos Inspector",
-  "main": "Inspector.js",
+  "description": "Superalgos Dashboards App",
+  "main": "dashboards.js",
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
