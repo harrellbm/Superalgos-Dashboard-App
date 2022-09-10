@@ -42,9 +42,7 @@ async function runRoot() {
     path: require('path'),
     ws: require('ws'),
     axios: require('axios'),
-    bootstrap: require('bootstrap'),
     moment: require('moment'),
-    portalVue: require('portal-vue'),
     vue: require('vue'),
     vueRouter: require('vue-router')
   }
@@ -62,7 +60,7 @@ async function runRoot() {
 
   async function run() {
     DS.app = require('./Dashboards/DashboardsApp.js').newDashboardsApp()
-    await DS.app.run(initialWorkspace)
+    await DS.app.run()
     console.log('Superalgos Dashboards App is Running!')
     if (process.send) {
       process.send('Running')

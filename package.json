@@ -13,7 +13,6 @@
   "dependencies": {
     "axios": "^0.27.2",
     "moment": "^2.29.3",
-    "portal-vue": "^2.1.7",
     "vue": "^3.2.39",
     "vue-router": "^4.0.3",
     "ws": "^8.8.1"
