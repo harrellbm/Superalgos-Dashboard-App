@@ -70,30 +70,19 @@ exports.newDashboardsApp = function newDashboardsApp() {
             console.log('SUPERALGOS DASHBOARDS CLIENT SERVERS:')
             console.log('')
 
-            DS.servers.WEBSOCKET_SERVER = WEBSOCKET_SERVER.newWebServer()
+            DS.servers.WEBSOCKET_SERVER = WEBSOCKET_SERVER.newWebSocketsServer()
             DS.servers.WEBSOCKET_SERVER.initialize()
-            DS.servers.WEBSOCKET_SERVER.run()
             console.log('Websocket Server .................................................. Started')
 
             console.log('')
-            console.log("You are running Superalgos Platform " + SA.version)
-            console.log('')
-            console.log("What's new? These are the main new features in this version:")
-            console.log('')
-            console.log('Superalgos P2P Network ...................................... Allows interconnecting clients so that users may collaborate.')
-            console.log('Real-time Trading Signals ................................... Enables the broadcasting and consumption of trading signals.')
-            console.log('Portfolio Manager ........................................... Portfolio Manager bots supervise and manage Trading Bots for improved capital allocation and risk management.')
-            console.log('')
-            console.log("What's next? This is the current development pipeline:")
-            console.log('')
-            console.log('Superalgos Mobile ........................................... Will allow users to consume trading signals from their mobile phones.')
+            console.log("You are running Superalgos Dashboards App " + SA.version)
             console.log('')
             console.log('Join the @superalgosdevelop Telegram Group to learn more!')
 
             console.log('')
 
         } catch (err) {
-            console.log((new Date()).toISOString(), '[ERROR] Platform App -> Error = ' + err.stack)
+            console.log((new Date()).toISOString(), '[ERROR] Dashboards App -> Error = ' + err.stack)
         }
     }
 }
