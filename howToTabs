@@ -1,0 +1,80 @@
+Intro to development
+During this example, I will not go into topics like v-for ,v-if etc. but I will try to explain the things that could cause more doubts.
+
+I have prepared two examples, the one you will read below without style, and the one you will find in the demo on Codesandbox where I used TailwindCSS to make it prettier
+
+In the example you will see below, we will focus more on features without any CSS style. (You will only see 1 CSS class that will align the content vertically or horizontally)
+
+If you want to see the version with the addition of some CSS classes you can see the demo here.
+
+Creating the AppTabs.vue component
+Let’s start by creating our core component: AppTabs.vue
+
+
+Vue.js tabs component 
+
+Let’s explain the code above.
+
+Props and named slots
+As you can see, this component allows the parent to choose the content.
+The tabs (navigation links) via the prop tabList, and the content via the named slots.
+
+Named slots are generated with a dynamic name based on the number of elements present inside tabList thanks to the index.
+I arrived at the solution of automatically generated named slots having a dialogue with a colleague (
+Luca Stefano Sartori
+)
+
+You can read more about named slots here
+
+The Difference Between Props, Slots and Scoped Slots in Vue.js
+Let’s see what is the best way to pass data between components
+medium.com
+
+The only requirement is the number of tabList is the same of the named slots of course, as we will see in a while.
+
+As you can see, there is also a prop called variant, this will take care of changing the alignment of the content by applying 1 CSS class dynamically based on prop the component receives. By default this prop is vertical .
+
+v-model
+At first, I was thinking to use a button instead of a radio button. It was certainly more appropriate but it led us to write more code to assign a value to a variable. Then talking again with my colleague I understood that this behavior can be replicated automatically using the v-model.
+
+The unique id
+If you are wondering why a _uid variable is used in this component, the reason is simple, it allows us to have unique attributes for our HTML tags, so if we use this component several times on the same page there will be no problems.
+
+Using the AppTabs component
+Let’s see how to use our component, I will use it inside a page called: App.vue
+
+
+<template>
+  <div>
+    <app-tabs :tabList="tabList">
+      <template v-slot:tabPanel-1> Content 1 </template>
+      <template v-slot:tabPanel-2> Content 2 </template>
+      <template v-slot:tabPanel-3> Content 3 </template>
+      <template v-slot:tabPanel-4> Content 4 </template>
+    </app-tabs>
+  </div>
+</template>
+
+<script>
+import AppTabs from "./components/AppTabs";
+export default {
+  components: {
+    AppTabs,
+  },
+  
+  data() {
+    return {
+      tabList: ["Tab 1", "Tab 2", "Tab 3", "Tab 4"],
+    };
+  },
+};
+</script>
+
+As you can see, the component is very simple to use.
+It is only necessary to pass it:
+
+An array of tabs: tabList
+The contents of the various tabs with the named slots with the specific name: tabPanel-${index} , where the index corresponds to the index + 1 of the tabList array.
+If you want to use the horizontal layout, add the prop variant to the component like this:
+
+<app-tabs :tabList=”tabList” variant=”horizontal”>
