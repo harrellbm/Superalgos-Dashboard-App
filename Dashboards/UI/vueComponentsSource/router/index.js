@@ -12,7 +12,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(window.location.origin),
+  history: createWebHistory(),
   routes
 })
 

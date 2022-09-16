@@ -15,6 +15,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './Dashboards/UI/vueComponentsSource/index.html',
+      publicPath: '/'
     }),
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
