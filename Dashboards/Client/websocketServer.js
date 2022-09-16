@@ -30,7 +30,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                     // Here is where all messages will be received through the websocket
                     try {
                         if (LOG_INFO === true) {
-                            //console.log(JSON.parse(message))
+                            //console.log(message)
                             //console.log('Message Received: ' + message.toString().substring(0, 10000))
                         }
                         
@@ -40,6 +40,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                         let messageType = messageArray[1]
                         let messageString = messageArray[2]
 
+                        // Handle messages from various sources 
                         if (origin === "Platform") {
                             if (messageType === "Info") {
                                 console.log('[Info] ', messageString)
@@ -50,6 +51,15 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                                     let messageObject = JSON.parse(messageArray[i])
                                     console.log("this is a Global Object", messageObject)
                                 }
+                            }
+                        } else if (origin === "UI") {
+                            if (messageType === "Info") {
+                                console.log ('[Info] ', messageString)
+                                
+                            } else if (messageType === "Startup") {
+                                console.log ('[Startup] ', messageString)
+                                let data = gatherDashboardData()
+                                socket.send(data)
                             }
                         }
 
@@ -67,5 +77,13 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
 
     function finalize () {
 
+    }
+
+    function gatherDashboardData () {
+        //TODO: create data structure engine for dashboards 
+        //TODO: save incoming data to data strucuturs 
+        //TODO: load those data structures here and send to UI
+        let data = "Here is some fake data to load"
+        return data
     }
 }

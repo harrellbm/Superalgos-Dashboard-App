@@ -1,5 +1,5 @@
 <template>
-<div v-if="load"  ><center><h1>Data is being fetched, please wait</h1></center>   </div>
+<div v-if="load"  ><h1>Data is being fetched, please wait</h1>  </div>
 
   <br />
   <br />
@@ -53,22 +53,6 @@ export default {
     let time = 5000;
     let load=ref(true);
      
-    setInterval( () => {
-     load.value=false;
-      axios
-        .get(url.value)
-        .then((response) => {
-          data.value = {
-            running: response.data.networkClients.length,
-            clint: response.data.networkClients,
-            test: i
-          };
-          i++;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, time);
     return {
       data,
       load,
