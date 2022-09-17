@@ -8,6 +8,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
     const WEB_SOCKET = SA.nodeModules.ws
     const port = '18043' //global.env.DASHBOARDS_WEB_SOCKETS_INTERFACE_PORT
     let socketServer
+    let dataMap = new Map()
 
     const LOG_INFO = true
    
@@ -36,22 +37,31 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                         
                         let messageArray = message.toString().split('|*|')
 
-                        let origin = messageArray[0]
-                        let messageType = messageArray[1]
-                        let messageString = messageArray[2]
+                        let origin = messageArray[0] // First argument should be the origin of the message
+                        let messageType = messageArray[1] // Second is the type of message being sent
+                        let messageString = messageArray[2] // Third is the name of the message if specified otherwise it is the message content
+                        // All other objects sent in the message will be appended starting on position 3 and onward.
 
                         // Handle messages from various sources 
-                        if (origin === "Platform") {
+                        if (origin !== "UI") {
                             if (messageType === "Info") {
-                                console.log('[Info] ', messageString)
+                                console.log('[Info] ', origin, '-->', messageString)
+
                             } else if (messageType === "Error") {
-                                console.log('[Error] ', messageString)
-                            } else if (messageType === "Globals") {
-                                for (let i = 2; i < messageArray.length; i++){
+                                console.log('[Error] ', origin, '-->', messageString)
+
+                            } else if (messageType === "Data") {
+                                let dataKey = origin + '-' + messageString 
+                                let dataContent = []
+                                for (let i = 3; i < messageArray.length; i++){
                                     let messageObject = JSON.parse(messageArray[i])
-                                    console.log("this is a Global Object", messageObject)
+                                    dataContent.push(messageObject)
                                 }
+                                dataMap.set(dataKey, dataContent)
+                                console.log("this is the data Map after update", dataMap)
+
                             }
+
                         } else if (origin === "UI") {
                             if (messageType === "Info") {
                                 console.log ('[Info] ', messageString)
