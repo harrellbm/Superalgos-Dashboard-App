@@ -8,7 +8,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
     const WEB_SOCKET = SA.nodeModules.ws
     const port = '18043' //global.env.DASHBOARDS_WEB_SOCKETS_INTERFACE_PORT
     let socketServer
-    let dataMap = new Map()
+    let UISocket
 
     const LOG_INFO = true
    
@@ -29,6 +29,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
 
                 function onMenssage(message) {
                     // Here is where all messages will be received through the websocket
+            
                     try {
                         if (LOG_INFO === true) {
                             //console.log(message)
@@ -37,9 +38,10 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                         
                         let messageArray = message.toString().split('|*|')
 
-                        let origin = messageArray[0] // First argument should be the origin of the message
-                        let messageType = messageArray[1] // Second is the type of message being sent
-                        let messageString = messageArray[2] // Third is the name of the message if specified otherwise it is the message content
+                        let dateTime = messageArray[0]
+                        let origin = messageArray[1] // First argument should be the origin of the message
+                        let messageType = messageArray[2] // Second is the type of message being sent
+                        let messageString = messageArray[3] // Third is the name of the message if specified otherwise it is the message content
                         // All other objects sent in the message will be appended starting on position 3 and onward.
 
                         // Handle messages from various sources 
@@ -51,29 +53,55 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                                 console.log('[Error] ', origin, '-->', messageString)
 
                             } else if (messageType === "Data") {
+                                // Generic handlier for incoming data
+                                // Expects valid JSON formatted data
                                 let dataKey = origin + '-' + messageString 
                                 let dataContent = []
-                                for (let i = 3; i < messageArray.length; i++){
-                                    let messageObject = JSON.parse(messageArray[i])
-                                    dataContent.push(messageObject)
+                                try {
+                                    for (let i = 4; i < messageArray.length; i++){
+                                        try {
+                                            let messageObject = JSON.parse(messageArray[i])
+                                            dataContent.push(messageObject)
+                                        } 
+                                        catch (err) {
+                                            console.log((new Date()).toISOString(), '[Error] Dashboard App -> Cannot parse data -> Data from: ', dataKey, ' -> ', err)
+                                        }
+                                    }
+                                    let message = dateTime + '|*|' + dataKey + '|*|' + JSON.stringify(dataContent)
+                                    if (UISocket !== undefined) {
+                                        UISocket.send(message)
+                                    }
+                                    
+                                    
+                                      // Broadcast to all.
+                                    /*socketServer.broadcast = function broadcast(message) {
+                                        socketServer.clients.forEach(function each(client) {
+                                        if ( client.readyState == WEB_SOCKET.OPEN && message != undefined ) 
+                                            client.send(message);
+                                        });
+                                    };
+                                    socketServer.broadcast( message)
+                                    //socket.send(message) */
+                                    console.log("this is the data Map after update",UISocket )
                                 }
-                                dataMap.set(dataKey, dataContent)
-                                console.log("this is the data Map after update", dataMap)
-
+                                catch (err) {
+                                    console.log((new Date()).toISOString(), '[Error] Dashboard App -> cannot update data map -> Data from: ', dataKey, ' -> ', err)
+                                }
                             }
 
                         } else if (origin === "UI") {
                             if (messageType === "Info") {
                                 console.log ('[Info] ', messageString)
+                                if (UISocket === undefined) {
+                                    UISocket = socket // Store UI socket for message forwarding
+                                }
                                 
                             } else if (messageType === "Startup") {
                                 console.log ('[Startup] ', messageString)
-                                let data = gatherDashboardData()
-                                socket.send(data)
+                                UISocket = socket // Store UI socket for message forwarding
                             }
                         }
 
-                        //socket.send(message)
                     } catch (err) {
                         console.log((new Date()).toISOString(), '[ERROR] Dashboards App -> Web Sockets Interface -> run -> onConnection -> onMenssage. err = ' + err.stack)
                     }
