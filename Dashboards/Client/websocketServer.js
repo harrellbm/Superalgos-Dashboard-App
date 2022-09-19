@@ -67,22 +67,12 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                                             console.log((new Date()).toISOString(), '[Error] Dashboard App -> Cannot parse data -> Data from: ', dataKey, ' -> ', err)
                                         }
                                     }
-                                    let message = dateTime + '|*|' + dataKey + '|*|' + JSON.stringify(dataContent)
+                                    
+                                    // forward data to UI
                                     if (UISocket !== undefined) {
+                                        let message = dateTime + '|*|' + dataKey + '|*|' + JSON.stringify(dataContent)
                                         UISocket.send(message)
                                     }
-                                    
-                                    
-                                      // Broadcast to all.
-                                    /*socketServer.broadcast = function broadcast(message) {
-                                        socketServer.clients.forEach(function each(client) {
-                                        if ( client.readyState == WEB_SOCKET.OPEN && message != undefined ) 
-                                            client.send(message);
-                                        });
-                                    };
-                                    socketServer.broadcast( message)
-                                    //socket.send(message) */
-                                    console.log("this is the data Map after update",UISocket )
                                 }
                                 catch (err) {
                                     console.log((new Date()).toISOString(), '[Error] Dashboard App -> cannot update data map -> Data from: ', dataKey, ' -> ', err)
@@ -90,6 +80,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                             }
 
                         } else if (origin === "UI") {
+                            // messages coming from UI
                             if (messageType === "Info") {
                                 console.log ('[Info] ', messageString)
                                 if (UISocket === undefined) {
@@ -115,13 +106,5 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
 
     function finalize () {
 
-    }
-
-    function gatherDashboardData () {
-        //TODO: create data structure engine for dashboards 
-        //TODO: save incoming data to data strucuturs 
-        //TODO: load those data structures here and send to UI
-        let data = "Here is some fake data to load"
-        return data
     }
 }
