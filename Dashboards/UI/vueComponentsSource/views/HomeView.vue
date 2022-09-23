@@ -1,6 +1,7 @@
 <template>
-<div v-if="load"  ><h1>Data is being fetched, please wait</h1>  </div>
-
+<h1>"these are our data keys"{{dataKeyArray}}</h1>
+<h2>"this is our loaded data'{{dataObject}}</h2>
+<ExpandableTree :label="label" :data="dataObject"></ExpandableTree>
   <br />
   <br />
   <div class="container-fluid">
@@ -27,14 +28,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="value in data.clint" :key="value">
-          <td>{{ value[0] }}</td>
-          <td>{{ value[1].userProfile }}</td>
-          <td>{{ value[1].instance }}</td>
-          <td>{{ value[1].clientVersion }}</td>
-          <td>{{ value[1].requestsCount }}</td>
-          <td>{{ value[1].requestNextTestCaseCount }}</td>
-          <td>{{ value[1].lastSeen }}</td>
+        <!--TODO: set up accessing incoming data map by key-->
+        <!--TODO: then set up recurive display of data-->
+        <!--TODO: then set up collapsable object-->
+        <!--TODO: then refactor to it's own SFC vue file-->
+        <!--TODO: then set up menu bar to choose dashboard-->
+        <tr v-for="value in incomingData" :key="value">
+          <td>{{ value }}</td>
+          <td>{{ value[1] }}</td>
+          <td>{{ value[1] }}</td>
+          <td>{{ value[1] }}</td>
+          <td>{{ value[1] }}</td>
+          <td>{{ value[1] }}</td>
+          <td>{{ value[1] }}</td>
         </tr>
       </tbody>
     </table>
@@ -42,23 +48,44 @@
 </template>
 
 <script>
-import axios from "axios";
 import { ref } from "vue";
+import ExpandableTree from "../components/expandableTree.vue";
 export default {
- 
-  setup() {
-    let url=ref("http://99.81.83.180:31248/Stats/Machine%20Learning");
-    let data = ref("");
-    let i = 0;
-    let time = 5000;
-    let load=ref(true);
-     
+  // Make global data variables accessible 
+  inject: ["incomingData"],
+  inject: ["dataKeyArray"],
+
+  // Check to see if key is defined if so get all the data associated with it and assign it to data variable 
+  data () {
     return {
-      data,
-      load,
-      url
-    };
+      label: "", 
+      dataObject: []
+    }
   },
+  computed: {
+    getIncomingData () {
+      if (this.dataKeyArray.has('Platform-Globals') === true) {
+        return this.dataObject = this.incomingData.get('Platform-Globas')
+      }
+      else {
+        return this.dataObject
+      }
+    }
+    
+  },
+  setup() {
+        let url = ref("http://99.81.83.180:31248/Stats/Machine Learning");
+        let data = ref("");
+        let i = 0;
+        let time = 5000;
+        let load = ref(true);
+        return {
+            data,
+            load,
+            url
+        };
+    },
+    components: { ExpandableTree }
 };
 </script>
 

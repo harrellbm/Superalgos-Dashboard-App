@@ -38,11 +38,11 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                         
                         let messageArray = message.toString().split('|*|')
 
-                        let dateTime = messageArray[0]
-                        let origin = messageArray[1] // First argument should be the origin of the message
-                        let messageType = messageArray[2] // Second is the type of message being sent
-                        let messageString = messageArray[3] // Third is the name of the message if specified otherwise it is the message content
-                        // All other objects sent in the message will be appended starting on position 3 and onward.
+                        let timestamp = messageArray[0] // First argument is timestamp message was sent
+                        let origin = messageArray[1] // Second argument should be the origin of the message
+                        let messageType = messageArray[2] // Third is the type of message being sent
+                        let messageString = messageArray[3] // Fourth is the messsage content unless it is a data type message. Then this will be the name of incoming data.
+                        // All other data objects sent in the message will be appended starting on position 4 and onward.
 
                         // Handle messages from various sources 
                         if (origin !== "UI") {
@@ -50,7 +50,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                                 console.log('[Info] ', origin, '-->', messageString)
 
                             } else if (messageType === "Error") {
-                                console.log('[Error] ', origin, '-->', messageString)
+                                console.log((new Date()).toISOString(), '[Error] ', origin, '-->', messageString)
 
                             } else if (messageType === "Data") {
                                 // Generic handlier for incoming data
@@ -68,14 +68,14 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                                         }
                                     }
                                     
-                                    // forward data to UI
+                                    // Forward data to UI
                                     if (UISocket !== undefined) {
-                                        let message = dateTime + '|*|' + dataKey + '|*|' + JSON.stringify(dataContent)
+                                        let message = timestamp + '|*|' + dataKey + '|*|' + JSON.stringify(dataContent)
                                         UISocket.send(message)
                                     }
                                 }
                                 catch (err) {
-                                    console.log((new Date()).toISOString(), '[Error] Dashboard App -> cannot update data map -> Data from: ', dataKey, ' -> ', err)
+                                    console.log((new Date()).toISOString(), '[Error] Dashboard App -> Something went wrong while receiving data -> Data from: ', dataKey, ' -> ', err)
                                 }
                             }
 
