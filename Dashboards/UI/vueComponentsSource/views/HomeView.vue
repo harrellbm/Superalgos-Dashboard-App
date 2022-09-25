@@ -1,7 +1,9 @@
 <template>
 <h1>"these are our data keys"{{dataKeyArray}}</h1>
-<h2>"this is our loaded data'{{dataObject}}</h2>
-<ExpandableTree :label="label" :data="dataObject"></ExpandableTree>
+<li v-for="(value, name) in getGlobals">
+  'this is the name: ' {{name}} 'this is the value: ' {{value}}
+</li>
+
   <br />
   <br />
   <div class="container-fluid">
@@ -51,27 +53,38 @@
 import { ref } from "vue";
 import ExpandableTree from "../components/expandableTree.vue";
 export default {
+  components: { ExpandableTree },
+  // Receive incoming data from parent app <ExpandableTree :label="label" :data=getGlobals></ExpandableTree>
+  props: ["incomingData"],
   // Make global data variables accessible 
-  inject: ["incomingData"],
   inject: ["dataKeyArray"],
 
   // Check to see if key is defined if so get all the data associated with it and assign it to data variable 
   data () {
     return {
+      dataKey: 'Platform-Globals',
+      dataObjects: [],
       label: "", 
-      dataObject: []
     }
   },
   computed: {
-    getIncomingData () {
-      if (this.dataKeyArray.has('Platform-Globals') === true) {
-        return this.dataObject = this.incomingData.get('Platform-Globas')
+    getGlobals () {
+      // If we find the right key, proceed to call for expected data objects
+      if (this.dataKey in this.incomingData) {
+        // Grab data Objects from the array assocated with the data Key
+        // For example: Plaform-Globals key holds an array of globals objects
+        for(let dataObject of this.incomingData[this.dataKey]) {
+          for (let dataValue in dataObject) {
+            this.dataObjects.push(dataValue)
+          }
+        }
       }
-      else {
-        return this.dataObject
-      }
+      return this.dataObjects
+      
     }
-    
+  },
+  methods: {
+
   },
   setup() {
         let url = ref("http://99.81.83.180:31248/Stats/Machine Learning");
@@ -85,7 +98,7 @@ export default {
             url
         };
     },
-    components: { ExpandableTree }
+    
 };
 </script>
 
