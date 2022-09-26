@@ -2,6 +2,7 @@
 <h1>"these are our data keys"{{dataKeyArray}}</h1>
 <li v-for="(value, name) in getGlobals">
   'this is the name: ' {{name}} 'this is the value: ' {{value}}
+  <li>{{getGlobals}}</li>
 </li>
 
   <br />
@@ -69,16 +70,16 @@ export default {
   },
   computed: {
     getGlobals () {
+      this.dataObjects = []
       // If we find the right key, proceed to call for expected data objects
       if (this.dataKey in this.incomingData) {
         // Grab data Objects from the array assocated with the data Key
         // For example: Plaform-Globals key holds an array of globals objects
         for(let dataObject of this.incomingData[this.dataKey]) {
-          for (let dataValue in dataObject) {
-            this.dataObjects.push(dataValue)
-          }
+          this.dataObjects.push(dataObject)
         }
       }
+      // Return all received data objects
       return this.dataObjects
       
     }
