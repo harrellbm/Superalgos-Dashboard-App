@@ -1,6 +1,6 @@
 <template>
 <h1>"these are our data keys"{{dataKeyArray}}</h1>
-<ExpandableTree v-for="(value, name) in getGlobals" :value=value :name=name></ExpandableTree>
+<ExpandableTree v-for="(value, name) in getGlobals" v-bind:value=value :name=name :depth="0"></ExpandableTree>
 <li v-for="(value, name) in getGlobals">
   'this is the name: ' {{name}} 'this is the value: ' {{value}}
   <li>{{getGlobals}}</li>
