@@ -1,9 +1,11 @@
 <template>
 <h1>"these are our data keys"{{dataKeyArray}}</h1>
+<ExpandableTree v-for="(value, name) in getGlobals" :value=value :name=name></ExpandableTree>
 <li v-for="(value, name) in getGlobals">
   'this is the name: ' {{name}} 'this is the value: ' {{value}}
   <li>{{getGlobals}}</li>
 </li>
+
 
   <br />
   <br />
@@ -55,7 +57,7 @@ import { ref } from "vue";
 import ExpandableTree from "../components/expandableTree.vue";
 export default {
   components: { ExpandableTree },
-  // Receive incoming data from parent app <ExpandableTree :label="label" :data=getGlobals></ExpandableTree>
+  // Receive incoming data from parent app 
   props: ["incomingData"],
   // Make global data variables accessible 
   inject: ["dataKeyArray"],

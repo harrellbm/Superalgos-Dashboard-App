@@ -1,18 +1,21 @@
 <template>
-    <div class="tree-menu">
-      <div>{{ label }}</div>
-      <tree-menu 
-        v-for="data in data" 
-        :data="data.nodes" 
-        :label="data.label"
+    <div class="expandable-tree">
+      <div>{{ name }}</div>
+
+      <expandable-tree 
+        v-if="typeof value === 'object'"
+        v-for="(data, name) in value" 
+        :value=data 
+        :name=name
       >
-      </tree-menu>
+      </expandable-tree>
+      <div v-else="value !== undefined || value !== null">{{value}}</div>
     </div>
   </template>
 
   <script>
     export default { 
-      props: [ 'label', 'data' ],
-      name: 'tree-menu'
+      props: [ 'value', 'name' ],
+      name: 'expandable-tree'
     }
   </script>
