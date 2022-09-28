@@ -1,55 +1,10 @@
 <template>
-<h1>"these are our data keys"{{dataKeyArray}}</h1>
-<ExpandableTree v-for="(value, name) in getGlobals" v-bind:value=value :name=name :depth="0"></ExpandableTree>
-<li v-for="(value, name) in getGlobals">
-  'this is the name: ' {{name}} 'this is the value: ' {{value}}
-  <li>{{getGlobals}}</li>
-</li>
-
-
+  <h1>"these are our data keys"{{dataKeyArray}}</h1>
   <br />
+  <ExpandableTree v-for="(value) in getGlobals" v-bind:value=value :depth="-1"></ExpandableTree>
   <br />
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-4">Page Refresh Count : {{ data.test }}</div>
-      <div class="col-4">Number of Working Clients : {{ data.running }}</div> 
-      <div  class="col-4">URL :<input type="text" v-model="url"> </div> 
-    </div>
-  </div>
-  <br />
-  <br />
-  <br />
-  <div class="container-fluid">
-    <table class="table table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>userProfile</th>
-          <th>instance</th>
-          <th>clientVersion</th>
-          <th>requestsCount</th>
-          <th>requestNextTestCaseCount</th>
-          <th>lastSeen</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!--TODO: set up accessing incoming data map by key-->
-        <!--TODO: then set up recurive display of data-->
-        <!--TODO: then set up collapsable object-->
-        <!--TODO: then refactor to it's own SFC vue file-->
+        <!--TODO: style expandable tree element -->
         <!--TODO: then set up menu bar to choose dashboard-->
-        <tr v-for="value in incomingData" :key="value">
-          <td>{{ value }}</td>
-          <td>{{ value[1] }}</td>
-          <td>{{ value[1] }}</td>
-          <td>{{ value[1] }}</td>
-          <td>{{ value[1] }}</td>
-          <td>{{ value[1] }}</td>
-          <td>{{ value[1] }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </template>
 
 <script>
