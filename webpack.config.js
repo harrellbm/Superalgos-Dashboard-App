@@ -10,6 +10,7 @@ module.exports = {
     rules: [
       { test: /\.vue$/, use: 'vue-loader' },
       { test: /\.css$/, use: ['vue-style-loader', 'css-loader']},
+      { test: /\.(png|svg|jpg|jpeg|gif)$/i, type: 'asset/resource', },
     ]
   },
   plugins: [
