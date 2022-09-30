@@ -1,11 +1,13 @@
 <template>
     <div class="expandable-tree" >
       <div :style="indent" @click="toggleChildren">
+        <!-- if element is showing show a minus sign otherwise show a plus sign -->
+        <span class="is-expanded" v-if="this.showChildren">&#8722;</span>
+        <span class="is-expanded" v-else>&#43;</span>
         <!-- Check if value is an array, because otherwise we do not have a proptery name to display -->
-        <!-- Note: there may be situations where the first recursive object does not have a name value to display in this case. No name value is passed in as a prop which will cause the first render to skip and continue recursion through the provided object -->
-        <span>{{ name }}</span>
+        <span class="property-name">{{ name }}</span>
         <!-- if value is not an object render it now since recursion stops here-->
-        <span v-if="isObject(value) === false"> : {{value}}</span>
+        <span class="property-value" v-if="isObject(value) === false"> : {{value}}</span>
       </div>
       <expandable-tree 
         v-if="isObject(value) === true && this.showChildren"
@@ -43,3 +45,40 @@
       }
     }
   </script>
+
+  <style scoped>
+    .expandable-tree {
+      border-style: solid;
+      border-width: 3px;
+      border-color: rgba(54, 85, 88, .3);
+      border-radius: 5px;
+      margin: 5px;
+      cursor: pointer;
+      padding: 4px;
+      font-size: 18pt;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    
+    .is-expanded {
+      background-color: #365558;
+      border-style: solid;
+      border-width: 2px;
+      border-color: #0295aa;
+      border-radius: 8px;
+      padding-left: 0.3em;
+      padding-right: 0.3em;
+      font-weight: 900;
+      color: white;
+    }
+
+    .property-name {
+      color: #324d50;
+      margin-left: 1em;
+    }
+
+    .property-value {
+      color: blue;
+    }
+
+  </style>

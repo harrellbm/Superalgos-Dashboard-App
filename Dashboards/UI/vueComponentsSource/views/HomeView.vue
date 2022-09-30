@@ -1,10 +1,14 @@
 <template>
-  <h1>"these are our data keys"{{dataKeyArray}}</h1>
-  <br />
-  <ExpandableTree v-for="(value, name) in getGlobals" :value="value" :name="name" :depth="0"></ExpandableTree>
-  <br />
+  <div class="dashboard-window">
+    <h1 class="test">"these are our data keys"{{dataKeyArray}}</h1>
+    <br />
+    <div v-for="(objs) in getGlobals">
+      <ExpandableTree v-for="(value, name) in objs" :value="value" :name="name" :depth="0"></ExpandableTree>
+    </div>
+    <br />
         <!--TODO: style expandable tree element -->
         <!--TODO: then set up menu bar to choose dashboard-->
+  </div>
 </template>
 
 <script>
@@ -59,5 +63,17 @@ export default {
     
 };
 </script>
-
+<style scoped>
+  .dashboard-window {
+    background: #f1f1f1
+  }
+  
+  .test {
+    color: red;
+    border-style: solid;
+    border-width: 1px;
+    border-color: blue;
+    border-radius: 5px;
+  }
+</style>
 
