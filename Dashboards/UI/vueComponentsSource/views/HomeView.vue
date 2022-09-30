@@ -1,7 +1,7 @@
 <template>
   <h1>"these are our data keys"{{dataKeyArray}}</h1>
   <br />
-  <ExpandableTree v-for="(value) in getGlobals" v-bind:value=value :depth="-1"></ExpandableTree>
+  <ExpandableTree v-for="(value, name) in getGlobals" :value="value" :name="name" :depth="0"></ExpandableTree>
   <br />
         <!--TODO: style expandable tree element -->
         <!--TODO: then set up menu bar to choose dashboard-->
