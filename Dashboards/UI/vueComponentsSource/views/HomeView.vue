@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard-window">
-    <img :src="logo" >
     <h1 class="test">"these are our data keys"{{dataKeyArray}}</h1>
     <br />
     <div v-for="(objs) in getGlobals">
@@ -15,7 +14,6 @@
 <script>
 import { ref } from "vue";
 import ExpandableTree from "../components/expandableTree.vue";
-import logo from "../assets/logo.png"
 export default {
   components: { ExpandableTree },
   // Receive incoming data from parent app 
@@ -29,7 +27,6 @@ export default {
       dataKey: 'Platform-Globals',
       dataObjects: [],
       label: "", 
-      logo: logo,
     }
   },
   computed: {
