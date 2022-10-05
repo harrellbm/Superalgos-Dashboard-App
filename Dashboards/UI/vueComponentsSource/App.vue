@@ -1,18 +1,28 @@
 <template>
-    <div class="nav-bar"><img class="logo" :src="logo" ><button class="nav-btn">Dashboards</button></div>
-
-    <router-view :incomingData="incomingDataObj"></router-view>
+    <div class="app-container">
+        <div class="nav-bar">
+            <img class="logo" :src="logo" >
+            <button class="nav-btn" @click="openMenu">Dashboards</button>
+            <button class="nav-btn" @click="openSettings">Settings</button>
+        </div>
+        <Drawer class="drawer-theme" :direction="'left'" :exist="true" ref="LeftDrawer">
+            <img class="logo" :src="logo" >
+        </Drawer>
+        <Drawer :direction="'right'" :exist="true" ref="RightDrawer">right</Drawer>
+        <router-view :incomingData="incomingDataObj"></router-view>
+    </div>
 <!--<globals-view :incomingData="incomingDataObj"></globals-view>-->
 </template>
 
 <script>
     import { computed } from 'vue'
     import GlobalsView from './globalsView.vue'
+    import Drawer from './components/Drawer.vue'
     import logo from "./assets/superalgos-logo-white.png"
     import background from "./assets/superalgos-header-background.png"
 
     export default {
-        components: { GlobalsView },
+        components: { GlobalsView, Drawer },
         data() {
             return {
                 test: 'this is a test',
@@ -20,6 +30,7 @@
                 dataKeyArray: [],
                 logo: logo,
                 background: background,
+                isActive: false,
             };
         },
         provide() {
@@ -32,6 +43,27 @@
             return {
                 dataKeyArray: computed(() => this.dataKeyArray)
             };
+        },
+        computed: {
+            btnClick () {
+                this.isActive = !this.isActive
+            }
+        },
+        methods: {
+            openMenu(){
+				if(this.$refs.LeftDrawer.active){
+					this.$refs.LeftDrawer.close();					
+				}else{
+					this.$refs.LeftDrawer.open();
+				}
+			},
+            openSettings(){
+				if(this.$refs.RightDrawer.active){
+					this.$refs.RightDrawer.close();					
+				}else{
+					this.$refs.RightDrawer.open();
+				}
+			}
         },
         // Spin up websocket client on app mount
         mounted: function () {
@@ -65,7 +97,23 @@
     }
 </script>
 
-<style scoped>
+<style>
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background: #888;
+    }
+
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    }
+
+    .app-container {
+        font:400 17px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+    }
+    
     .nav-bar {
         width: 100%; 
         background-image: url('~./assets/superalgos-header-background.png');
@@ -77,25 +125,20 @@
     }
 
     .nav-btn {
-        height: 100%;
         font-size: 16px;
         color: white;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
         background-color: transparent;
+        border: none;
     }
 
     .nav-btn:hover {
         font-size: 16px;
         color: white;
-        background-color: #333;
+        background-color: rgba(51, 51, 51, 0.7);
     }
-
-    .nav-btn:active {
-        border-bottom: solid 2px white;
-    }
-
 
 </style>
   

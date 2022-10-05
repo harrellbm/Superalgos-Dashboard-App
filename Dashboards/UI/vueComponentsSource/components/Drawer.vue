@@ -235,7 +235,7 @@
 	    height: 100%;
 	    top: 0px;
 		transition:transform 0.3s ease;
-	    background:#fff;
+	    background: #333;
 	    width: 300px;
 		overflow-y: auto;
 		overflow-x: hidden;
