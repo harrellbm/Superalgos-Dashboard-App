@@ -1,6 +1,6 @@
 <template>
     <div class="expandable-tree" >
-      <div :style="indent" @click="toggleChildren">
+      <div class="content-div" :style="indent" @click="toggleChildren">
         <!-- if element is showing show a minus sign otherwise show a plus sign -->
         <span class="is-expanded" v-if="this.showChildren">&#8722;</span>
         <span class="is-expanded" v-else>&#43;</span>
@@ -58,6 +58,10 @@
       font-size: 18pt;
       overflow-x: auto;
       overflow-y: hidden;
+    }
+
+    .content-div {
+      width:fit-content;
     }
     
     .is-expanded {
