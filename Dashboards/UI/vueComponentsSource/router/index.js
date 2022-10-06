@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import GlobalView from '../views/GlobalsView.vue'
+import DevelopersView from '../views/DevelopersView.vue'
 
 
 const routes = [
@@ -10,9 +10,9 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/global',
-    name: 'Global',
-    component: GlobalView
+    path: '/Developers',
+    name: 'Developers Dashboard',
+    component: DevelopersView
   }
   
 ]

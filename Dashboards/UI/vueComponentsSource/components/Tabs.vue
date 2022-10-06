@@ -12,7 +12,7 @@
       }"
     >
       <li v-for="(tab, index) in tabList" :key="index">
-        <label :class="tab-button" :for="`${_uid}${index}`" v-text="tab" />
+        <label class="tab-button" :for="`${_uid}${index}`" v-text="tab" />
         <input style="display:none"
           :id="`${_uid}${index}`"
           type="radio"

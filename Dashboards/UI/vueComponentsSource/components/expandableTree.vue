@@ -53,7 +53,6 @@
       border-color: rgba(54, 85, 88, .3);
       border-radius: 5px;
       margin: 5px;
-      cursor: pointer;
       padding: 4px;
       padding-bottom: 7px;
       font-size: 18pt;
@@ -63,6 +62,7 @@
 
     .content-div {
       width:fit-content;
+      cursor: pointer;
     }
     
     .is-expanded {

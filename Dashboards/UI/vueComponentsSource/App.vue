@@ -34,11 +34,6 @@
                 isActive: false,
             };
         },
-        provide() {
-            return {
-                dataKeyArray: computed(() => this.dataKeyArray)
-            };
-        },
         computed: {
             dashboards () {
                 return this.$router.getRoutes()

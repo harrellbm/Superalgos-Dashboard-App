@@ -1,13 +1,8 @@
 <template>
   <div class="dashboard-window">
-    <h1 class="test">"these are our data keys"{{dataKeyArray}}</h1>
-    <br />
     <div v-for="(objs) in getGlobals">
       <ExpandableTree v-for="(value, name) in objs" :value="value" :name="name" :depth="0"></ExpandableTree>
     </div>
-    <br />
-        <!--TODO: style expandable tree element -->
-        <!--TODO: then set up menu bar to choose dashboard-->
   </div>
 </template>
 
@@ -18,15 +13,12 @@ export default {
   components: { ExpandableTree },
   // Receive incoming data from parent app 
   props: ["incomingData"],
-  // Make global data variables accessible 
-  inject: ["dataKeyArray"],
 
   // Check to see if key is defined if so get all the data associated with it and assign it to data variable 
   data () {
     return {
       dataKey: 'Platform-Globals',
       dataObjects: [],
-      label: "", 
     }
   },
   computed: {
