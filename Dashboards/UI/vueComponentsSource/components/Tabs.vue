@@ -1,17 +1,19 @@
 <template>
   <div
+    class="list-none bg-blue-900 bg-opacity-30 p-1.5 rounded-lg text-center overflow-auto whitespace-nowrap"
     :class="{
       flex: variant === 'horizontal',
     }"
   >
     <ul
+      class="tab-container-vertical"
       :class="{
         flex: variant === 'vertical',
       }"
     >
       <li v-for="(tab, index) in tabList" :key="index">
-        <label :for="`${_uid}${index}`" v-text="tab" />
-        <input
+        <label :class="tab-button" :for="`${_uid}${index}`" v-text="tab" />
+        <input style="display:none"
           :id="`${_uid}${index}`"
           type="radio"
           :name="`${_uid}-tab`"
@@ -51,8 +53,20 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .flex {
   display: flex;
 }
+
+.tab-container-vertical {
+  list-style: none;
+  background-color: grey;
+  justify-content: space-around;
+  padding: 0px;
+}
+
+.tab-button{
+  cursor: pointer;
+}
+
 </style>
