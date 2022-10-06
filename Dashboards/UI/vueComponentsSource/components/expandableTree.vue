@@ -55,6 +55,7 @@
       margin: 5px;
       cursor: pointer;
       padding: 4px;
+      padding-bottom: 7px;
       font-size: 18pt;
       overflow-x: auto;
       overflow-y: hidden;
@@ -72,6 +73,7 @@
       border-radius: 8px;
       padding-left: 0.3em;
       padding-right: 0.3em;
+      padding-bottom: 0.15em;
       font-weight: 900;
       color: white;
     }

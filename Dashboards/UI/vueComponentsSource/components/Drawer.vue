@@ -240,5 +240,6 @@
 		overflow-y: auto;
 		overflow-x: hidden;
 		word-wrap: break-word;
+		color: white;
 	}
 </style>

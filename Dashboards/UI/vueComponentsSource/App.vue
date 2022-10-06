@@ -7,22 +7,23 @@
         </div>
         <Drawer class="drawer-theme" :direction="'left'" :exist="true" ref="LeftDrawer">
             <img class="logo" :src="logo" >
+            <div class="dash-link-container" v-for="dashboard in dashboards">
+                <router-link class="dash-link" :to="{ name: dashboard.name }" >{{dashboard.name}}</router-link>
+            </div>
         </Drawer>
-        <Drawer :direction="'right'" :exist="true" ref="RightDrawer">right</Drawer>
-        <router-view :incomingData="incomingDataObj"></router-view>
+        <Drawer class="drawer-theme" :direction="'right'" :exist="true" ref="RightDrawer">Settings Coming Soon!</Drawer>
+        <router-view class="dashboard-view" :incomingData="incomingDataObj"></router-view>
     </div>
-<!--<globals-view :incomingData="incomingDataObj"></globals-view>-->
 </template>
 
 <script>
     import { computed } from 'vue'
-    import GlobalsView from './globalsView.vue'
     import Drawer from './components/Drawer.vue'
     import logo from "./assets/superalgos-logo-white.png"
     import background from "./assets/superalgos-header-background.png"
 
     export default {
-        components: { GlobalsView, Drawer },
+        components: { Drawer },
         data() {
             return {
                 test: 'this is a test',
@@ -35,18 +36,12 @@
         },
         provide() {
             return {
-                // Make incomingData variable available to all child elements
-                incomingData: computed(() => this.incomingDataObj)
-            };
-        },
-        provide() {
-            return {
                 dataKeyArray: computed(() => this.dataKeyArray)
             };
         },
         computed: {
-            btnClick () {
-                this.isActive = !this.isActive
+            dashboards () {
+                return this.$router.getRoutes()
             }
         },
         methods: {
@@ -115,7 +110,12 @@
     }
     
     .nav-bar {
-        width: 100%; 
+        position:fixed; 
+        left:0;           
+        top:0;            
+        width:100vw;      
+        z-index:200;  
+        height:50spx;  
         background-image: url('~./assets/superalgos-header-background.png');
         display: flex; 
     }
@@ -140,6 +140,29 @@
         background-color: rgba(51, 51, 51, 0.7);
     }
 
+    .dash-link-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dash-link{
+        color: white;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 6px;
+        padding: 10px;
+        width: 80%;
+        text-decoration: none;
+    }
+
+    .dash-link:hover {
+        background-color: rgba(227, 73, 60, 0.5);
+    }
+
+    .dashboard-view {
+        margin-top: 50px;
+    }
 </style>
   
 

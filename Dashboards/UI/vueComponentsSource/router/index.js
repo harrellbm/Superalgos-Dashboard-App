@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import GlobalView from '../views/GlobalsView.vue'
 
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: HomeView
+  },
+  {
+    path: '/global',
+    name: 'Global',
+    component: GlobalView
   }
   
 ]
