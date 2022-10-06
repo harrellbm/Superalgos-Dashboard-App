@@ -5,7 +5,11 @@
                 <ExpandableTree v-for="(value, name) in objs" :value="value" :name="name" :depth="0"></ExpandableTree>
             </div> 
         </template>
-        <template v-slot:tabPanel-2> Content 2 </template>
+        <template v-slot:tabPanel-2>
+            <div v-for="(objs) in getRaw">
+                <ExpandableTree v-for="(value, name) in objs" :value="value" :name="name" :depth="0"></ExpandableTree>
+            </div> 
+        </template>
     </Tabs>
 </template>
 
@@ -19,22 +23,35 @@
             return {
                 tabList: ["Globals", "Raw Data"],
                 dataKey: 'Platform-Globals',
-                dataObjects: [],
+                globalsObj: [],
+                rawObj: [],
             };
         },
         computed: {
             getGlobals () {
-                this.dataObjects = []
+                this.globalsObj = []
                 // If we find the right key, proceed to call for expected data objects
                 if (this.dataKey in this.incomingData) {
                 // Grab data Objects from the array assocated with the data Key
                 // For example: Plaform-Globals key holds an array of globals objects
                     for(let dataObject of this.incomingData[this.dataKey]) {
-                        this.dataObjects.push(dataObject)
+                        this.globalsObj.push(dataObject)
                     }
                 }
                 // Return all received data objects
-                return this.dataObjects
+                return this.globalsObj
+            },
+            getRaw () {
+                this.rawObj = []
+                // Grab all incoming Data and assign it to rawObj
+                for(let objKey in this.incomingData) {
+                    let newObj = {}
+                    newObj[objKey] = this.incomingData[objKey]
+                    this.rawObj.push(newObj)
+                }
+                
+                // Return all received data objects
+                return this.rawObj
             }
         }
     };
