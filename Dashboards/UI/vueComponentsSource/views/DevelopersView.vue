@@ -1,11 +1,11 @@
 <template>
     <Tabs :tabList="tabList">
-      <template v-slot:tabPanel-1>   
-        <div v-for="(objs) in getGlobals">
-            <ExpandableTree v-for="(value, name) in objs" :value="value" :name="name" :depth="0"></ExpandableTree>
-        </div> 
+        <template v-slot:tabPanel-1>   
+            <div v-for="(objs) in getGlobals">
+                <ExpandableTree v-for="(value, name) in objs" :value="value" :name="name" :depth="0"></ExpandableTree>
+            </div> 
         </template>
-      <template v-slot:tabPanel-2> Content 2 </template>
+        <template v-slot:tabPanel-2> Content 2 </template>
     </Tabs>
 </template>
 

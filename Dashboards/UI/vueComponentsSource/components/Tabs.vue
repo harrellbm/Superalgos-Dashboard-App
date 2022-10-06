@@ -12,11 +12,11 @@
       }"
     >
       <li v-for="(tab, index) in tabList" :key="index">
-        <label class="tab-button" :for="`${_uid}${index}`" v-text="tab" />
+        <label class="tab-button" :class="{ isActive: activeTab === index + 1}" :for="`${index}`" v-text="tab" />
         <input style="display:none"
-          :id="`${_uid}${index}`"
+          :id="`${index}`"
           type="radio"
-          :name="`${_uid}-tab`"
+          :name="`${index + 1}-tab`"
           :value="index + 1"
           v-model="activeTab"
         />
@@ -60,13 +60,21 @@ export default {
 
 .tab-container-vertical {
   list-style: none;
-  background-color: grey;
   justify-content: space-around;
-  padding: 0px;
+  padding: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-bottom: solid 1px #333;
 }
 
 .tab-button{
   cursor: pointer;
+  padding: 10px;
+}
+
+.isActive {
+  font-weight: bolder;
+  border-bottom: solid 3px #333;
 }
 
 </style>
