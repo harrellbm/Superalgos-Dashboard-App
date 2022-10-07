@@ -32,8 +32,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
             
                     try {
                         if (LOG_INFO === true) {
-                            //console.log(message)
-                            //console.log('Message Received: ' + message.toString().substring(0, 10000))
+                            console.log('Message Received: ' + message.toString().substring(0, 10000))
                         }
                         
                         let messageArray = message.toString().split('|*|')
@@ -97,7 +96,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                         console.log((new Date()).toISOString(), '[ERROR] Dashboards App -> Web Sockets Interface -> run -> onConnection -> onMenssage. err = ' + err.stack)
                     }
                 }
-        }
+            }
         } catch (err) {
             console.log((new Date()).toISOString(), '[ERROR] Dashboards App -> Web Sockets Interface -> run -> err.message = ' + err.message)
             console.log((new Date()).toISOString(), '[ERROR] Dashboards App -> Web Sockets Interface -> run -> err.message = ' + err.stack)

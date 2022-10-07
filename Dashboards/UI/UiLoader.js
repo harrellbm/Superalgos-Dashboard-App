@@ -15,5 +15,4 @@ exports.newDashboardsUIApp = function newDashboardsUIApp() {
     function finalize () {
 
     }
-    
 }
