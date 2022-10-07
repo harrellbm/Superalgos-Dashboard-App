@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-window">
     <img class="image" :src="dashboardIcon">
-    <H2><strong>Welcome to the Superalgos Dashboard App!</strong></H2>
+    <h2><strong>Welcome to the Superalgos Dashboard App!</strong></h2>
     <br/>
     <span>The purpose of this app is to help make visualizing and accessing data from Superalgos a breeze.</span>
   </div>

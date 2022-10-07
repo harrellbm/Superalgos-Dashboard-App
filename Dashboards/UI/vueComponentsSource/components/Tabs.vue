@@ -1,14 +1,13 @@
+<!--TODO: add styles for horizonal tab setting-->
 <template>
   <div
-    class="list-none bg-blue-900 bg-opacity-30 p-1.5 rounded-lg text-center overflow-auto whitespace-nowrap"
     :class="{
       flex: variant === 'horizontal',
     }"
   >
     <ul
-      class="tab-container-vertical"
       :class="{
-        flex: variant === 'vertical',
+        tabContainerVertical: variant === 'vertical',
       }"
     >
       <li v-for="(tab, index) in tabList" :key="index">
@@ -58,7 +57,8 @@ export default {
   display: flex;
 }
 
-.tab-container-vertical {
+.tabContainerVertical {
+  display: flex;
   list-style: none;
   justify-content: space-around;
   padding: 10px;

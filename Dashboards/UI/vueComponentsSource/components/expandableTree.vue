@@ -26,9 +26,8 @@
       name: 'expandable-tree',
       data() {
         return { 
-          showChildren: false,
-          objString: 'object'
-         }
+          showChildren: false
+        }
       },
       computed: {
         indent() {
@@ -61,7 +60,7 @@
     }
 
     .content-div {
-      width:fit-content;
+      width: fit-content;
       cursor: pointer;
     }
     
@@ -86,5 +85,4 @@
     .property-value {
       color: blue;
     }
-
   </style>
