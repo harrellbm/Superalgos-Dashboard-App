@@ -23,9 +23,9 @@ const runDashboards = () => {
     process.argv.includes("/h") ||
     process.argv.includes("/help")) {
 
-    console.log('Superalgos')
+    console.log('Superalgos Dashboard App')
     console.log('')
-    //console.log('VERSION:               ' + require('../package.json').version)
+    console.log('VERSION:               ' + require('../package.json').version)
     console.log('')
     console.log('WEB:                   https://www.superalgos.org')
     console.log('')
@@ -39,8 +39,9 @@ const runDashboards = () => {
     console.log('')
     console.log('                       help:        Optional. Use it to see this helping information.')
     console.log('                       minMemo:     Optional. Use it when your hardware has less than 8 Gb or memory.')
+    console.log('                       devBackend:  Optional. Use it when you want to only start the backend of the app.')
+    console.log('                       devFrontend: Optional. Use it when you want to only start the UI of the app.')
     console.log('')
-    console.log('If you are having an error while trying to run the Superalgos Dashboards Client, consider this:')
 
     return 'help message has been displayed'
   }
@@ -75,6 +76,14 @@ const runDashboards = () => {
   if (process.argv.includes("minMemo")) {
     optionsAccepted++
     console.log('minMemo ..................................................... Running with Minimun Required Memory.')
+  } 
+  if (process.argv.includes("devBackend")) {
+    optionsAccepted++
+    console.log('devBackend ..................................................... Running with Backend Only.')
+  } 
+  if (process.argv.includes("devFrontend")) {
+    optionsAccepted++
+    console.log('devFrontend ..................................................... Running with Frontend Only.')
   } 
   if (optionsAccepted === 0) {
     console.log('none ........................................................ Running without any command line options.')

@@ -6,8 +6,8 @@ exports.newDashboardsApp = function newDashboardsApp() {
 
     return thisObject
 
-    async function run() {
-
+    async function run(mode) {
+        
         process.on('uncaughtException', function (err) {
             if (err.message && err.message.indexOf("EADDRINUSE") > 0) {
                 console.log("The Superalgos Dashboards Client cannot be started. Reason: the port configured migth be being used by another application, or Superalgos Dashboards Client might be already running.")
@@ -71,15 +71,27 @@ exports.newDashboardsApp = function newDashboardsApp() {
             console.log('SUPERALGOS DASHBOARDS CLIENT SERVERS:')
             console.log('')
 
+            if (mode === "devBackend") {
+                DS.servers.WEBSOCKET_SERVER = WEBSOCKET_SERVER.newWebSocketsServer()
+                DS.servers.WEBSOCKET_SERVER.initialize()
+                console.log('Websocket Server .................................................. Started')
+                
+            } else if (mode === "devFrontend") {
+                DS.servers.UI_SERVER = UI_SERVER.newDashboardsUIApp()
+                DS.servers.UI_SERVER.initialize()
+                console.log('UI Server .................................................. Started')
             
+            } else {
+                // Start both front and backend if no dev mode declared
+                DS.servers.WEBSOCKET_SERVER = WEBSOCKET_SERVER.newWebSocketsServer()
+                DS.servers.WEBSOCKET_SERVER.initialize()
+                console.log('Websocket Server .................................................. Started')
 
-            DS.servers.WEBSOCKET_SERVER = WEBSOCKET_SERVER.newWebSocketsServer()
-            DS.servers.WEBSOCKET_SERVER.initialize()
-            console.log('Websocket Server .................................................. Started')
+                DS.servers.UI_SERVER = UI_SERVER.newDashboardsUIApp()
+                DS.servers.UI_SERVER.initialize()
+                console.log('UI Server .................................................. Started')
+            }
 
-            DS.servers.UI_SERVER = UI_SERVER.newDashboardsUIApp()
-            DS.servers.UI_SERVER.initialize()
-            
             console.log('')
             console.log("You are running Superalgos Dashboards App " + SA.version)
             console.log('')

@@ -3,7 +3,7 @@ runRoot()
 async function runRoot() {
   /*
   This module represents the execution root of the Dashboards App.
-  We use this module that is outside the Platform folder to
+  We use this module that is outside the Dashboards folder to
   load all node dependencies and get them ready for the actual App.
   */
 
@@ -41,11 +41,9 @@ async function runRoot() {
     util: require('util'),
     path: require('path'),
     ws: require('ws'),
-    axios: require('axios'),
     moment: require('moment'),
     vue: require('vue'),
-    vueRouter: require('vue-router'),
-    open: require('open')
+    vueRouter: require('vue-router')
   }
   /* 
   Setting up the App Schema Memory Map. 
@@ -57,11 +55,24 @@ async function runRoot() {
   Version Management
   */
   SA.version = require('./package.json').version
-  run()
 
-  async function run() {
+  let mode
+  for (let i = 0; i < process.argv.length; i++) {
+    let arg = process.argv[i]
+
+    if (arg === 'minMemo') { continue }
+    if (arg.indexOf(':') >= 0) { continue }
+    if (arg.indexOf('/') >= 0) { continue }
+    if (arg === "devBackend" || arg === "devFrontend" ) {
+      mode = arg
+    }
+  }
+ 
+  run(mode)
+
+  async function run(mode) {
     DS.app = require('./Dashboards/DashboardsApp.js').newDashboardsApp()
-    await DS.app.run()
+    await DS.app.run(mode)
     console.log('Superalgos Dashboards App is Running!')
     if (process.send) {
       process.send('Running')
