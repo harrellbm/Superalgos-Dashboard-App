@@ -44,7 +44,8 @@ async function runRoot() {
     axios: require('axios'),
     moment: require('moment'),
     vue: require('vue'),
-    vueRouter: require('vue-router')
+    vueRouter: require('vue-router'),
+    open: require('open')
   }
   /* 
   Setting up the App Schema Memory Map. 

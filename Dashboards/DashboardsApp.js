@@ -59,7 +59,7 @@ exports.newDashboardsApp = function newDashboardsApp() {
             }
 
             /* Servers */
-            //let UI_SERVER = require('./UI/AppLoader.js')
+            let UI_SERVER = require('./UI/UiLoader.js')
             let WEBSOCKET_SERVER = require('./Client/websocketServer.js')
 
             /* Network Interfaces */
@@ -71,12 +71,15 @@ exports.newDashboardsApp = function newDashboardsApp() {
             console.log('SUPERALGOS DASHBOARDS CLIENT SERVERS:')
             console.log('')
 
-            //DS.servers.UI_SERVER = UI_SERVER.newDashboardsUIApp()
+            
 
             DS.servers.WEBSOCKET_SERVER = WEBSOCKET_SERVER.newWebSocketsServer()
             DS.servers.WEBSOCKET_SERVER.initialize()
             console.log('Websocket Server .................................................. Started')
 
+            DS.servers.UI_SERVER = UI_SERVER.newDashboardsUIApp()
+            DS.servers.UI_SERVER.initialize()
+            
             console.log('')
             console.log("You are running Superalgos Dashboards App " + SA.version)
             console.log('')

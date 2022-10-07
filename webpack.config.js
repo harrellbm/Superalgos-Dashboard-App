@@ -16,6 +16,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './Dashboards/UI/vueComponentsSource/index.html',
+      favicon: './Dashboards/UI/vueComponentsSource/assets/favicon.ico',
       publicPath: '/'
     }),
     new VueLoaderPlugin(),
@@ -30,5 +31,6 @@ module.exports = {
     filename: 'bundle.js',
   },
   devServer: {
+    open: true
   }
 };
