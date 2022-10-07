@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: '/Developers',
-    name: 'Developers Dashboard',
+    name: 'Developers',
     component: DevelopersView
   }
   

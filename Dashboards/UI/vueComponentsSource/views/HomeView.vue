@@ -8,26 +8,23 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import dashboardIcon from "../assets/dashboard.png"
-export default {
-  // Receive incoming data from parent app 
-  props: ["incomingData"],
+  import dashboardIcon from "../assets/dashboard.png"
+  export default {
+    // Receive incoming data from parent app 
+    props: ["incomingData"],
  
-  data () {
-    return {
-      dataKey: '',
-      dataObjects: [],
-      dashboardIcon: dashboardIcon,
-    }
-  },
-  computed: {
-
-  },
-  methods: {
-
-  },  
-};
+    data () {
+      return {
+        dataKey: '',
+        dataObjects: [],
+        dashboardIcon: dashboardIcon,
+      }
+    },
+    computed: {
+    },
+    methods: {
+    },  
+  };
 </script>
 
 <style scoped>
@@ -43,6 +40,5 @@ export default {
     margin-top: 10px;
     height: 100px;
   }
-  
 </style>
 

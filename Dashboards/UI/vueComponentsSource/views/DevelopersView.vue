@@ -51,7 +51,6 @@
                     newObj[objKey] = this.incomingData[objKey]
                     this.rawObj.push(newObj)
                 }
-                
                 // Return all received data objects
                 return this.rawObj
             }
