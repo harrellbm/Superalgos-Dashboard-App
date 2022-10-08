@@ -22,7 +22,7 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
 
             function onConnection(socket) {
                 if (LOG_INFO === true) {
-                    console.log('New Websocket Connection.')
+                    console.log('[INFO] New Websocket Connection.')
                 }
 
                 socket.on('message', onMenssage)
@@ -31,10 +31,6 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                     // Here is where all messages will be received through the websocket
             
                     try {
-                        if (LOG_INFO === true) {
-                            console.log('Message Received: ' + message.toString().substring(0, 10000))
-                        }
-                        
                         let messageArray = message.toString().split('|*|')
 
                         let timestamp = messageArray[0] // First argument is timestamp message was sent
@@ -46,10 +42,12 @@ exports.newWebSocketsServer = function newWebSocketsServer() {
                         // Handle messages from various sources 
                         if (origin !== "UI") {
                             if (messageType === "Info") {
-                                console.log('[Info] ', origin, '-->', messageString)
+                                if (LOG_INFO === true) {
+                                    console.log(timestamp,'[Info] ', origin, '-->', messageString)
+                                }
 
                             } else if (messageType === "Error") {
-                                console.log((new Date()).toISOString(), '[Error] ', origin, '-->', messageString)
+                                console.log(timestamp, '[Error] ', origin, '-->', messageString)
 
                             } else if (messageType === "Data") {
                                 // Generic handlier for incoming data
