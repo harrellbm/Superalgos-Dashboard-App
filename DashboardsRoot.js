@@ -40,10 +40,7 @@ async function runRoot() {
     fs: require('fs'),
     util: require('util'),
     path: require('path'),
-    ws: require('ws'),
-    moment: require('moment'),
-    vue: require('vue'),
-    vueRouter: require('vue-router')
+    ws: require('ws')
   }
   /* 
   Setting up the App Schema Memory Map. 
@@ -54,7 +51,7 @@ async function runRoot() {
   /*
   Version Management
   */
-  SA.version = require('./package.json').version
+  SA.version = "Alpha 1"
 
   let mode
   for (let i = 0; i < process.argv.length; i++) {

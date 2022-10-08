@@ -74,12 +74,12 @@ exports.newDashboardsApp = function newDashboardsApp() {
             if (mode === "devBackend") {
                 DS.servers.WEBSOCKET_SERVER = WEBSOCKET_SERVER.newWebSocketsServer()
                 DS.servers.WEBSOCKET_SERVER.initialize()
-                console.log('Websocket Server .................................................. Started')
+                console.log('Websocket Server .................................................. Started in Dev Mode')
                 
             } else if (mode === "devFrontend") {
                 DS.servers.UI_SERVER = UI_SERVER.newDashboardsUIApp()
                 DS.servers.UI_SERVER.initialize()
-                console.log('UI Server .................................................. Started')
+                console.log('UI Server .................................................. Started in Dev Mode')
             
             } else {
                 // Start both front and backend if no dev mode declared

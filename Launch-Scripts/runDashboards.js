@@ -6,7 +6,7 @@ const fatalErrorHelp = () => {
   console.log('* If your device does not have MORE than 8GB of RAM then please use the minMemo option.')
   console.log('* Do not use this app if your OS does not have a user interface.')
   console.log('')
-  console.log('If you continue having trouble to starting the Superalgos Dashboards Client try:')
+  console.log('If you continue having trouble starting the Superalgos Dashboards Client try:')
   console.log('')
   console.log('node dashboards minMemo')
   return 'fatal error help message displayed'
@@ -108,7 +108,7 @@ const runDashboards = () => {
     }
   } else {
     console.log('')
-    console.log('ERROR: node_modules does not exist. Try running "node setup" to solve this issue. Then try again. You can finded detailed instructions for this in the ReadMe.')
+    console.log('[ERROR] node_modules does not exist. Try running "node setup" to solve this issue. Then try again. You can finded detailed instructions for this in the ReadMe.')
     console.log('')
   }
 
